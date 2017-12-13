@@ -46,7 +46,6 @@ abstract class Object{
         $oQuery = self::$db->prepare("SELECT * FROM {$table} WHERE id=:need_id");
         $oQuery->execute(['need_id' => $id]);
         $aRes = $oQuery->fetch(PDO::FETCH_ASSOC);
-
         return $aRes? new $class($aRes):null;
     }
 
@@ -56,6 +55,12 @@ abstract class Object{
         $table = $class::TableName();
         $oQuery = self::$db->query("SELECT * FROM {$table}");
         return $oQuery->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function delete($id) {
+        $class = get_called_class();
+        $table = $class::TableName();
+        return self::$db->query("DELETE FROM {$table} WHERE id=$id");
     }
 
 

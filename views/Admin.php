@@ -1,35 +1,28 @@
 <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3 toppad" >
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><?php echo $this->aData['Car']->mark.' '.$this->aData['Car']->model.' ID: '.$this->aData['Car']->car_id ?></h3>
-                </div>
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" src="../foto/<?php echo $this->aData['Car']->foto ?>" class="img-circle img-responsive"> </div>
-
-                        <div class=" col-md-9 col-lg-9 ">
-                            <form action="edit" method="post" enctype="multipart/form-data">
-                                <table class="table table-user-information">
-                                    <tbody>
-                                    <tr>
-                                        <td>Ваш Email:</td>
-                                        <td><input type="email" class="form-control-static" name="cost_less_30_inc" placeholder="<?php echo $this->aData['Car']->cost_less_30_inc ?>"></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ваша страничка:</td>
-                                        <td><input type="text" class="form-control-static" name="cost_more_31" placeholder="<?php echo $this->aData['Car']->cost_more_31 ?>"></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <button type="submit" class="btn btn-default">Редактировать</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
+    <p>Сообщения от пользователей: </p>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Пользователь</th>
+            <th>Текст</th>
+            <th>Статус</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($this->aData as $message): ?>
+                <tr>
+                    <td><?php echo $message->login?></td>
+                    <td><?php echo $message->text?>
+                    <form action="editmessage" method="post">
+                        <input type="hidden"  name="message_id" value="<?php echo $message->id?>">
+                        <button type="submit" class="btn btn-default">Редактировать сообщение</button>
+                    </form>
+                    <td><? if($message->status):?><span class="glyphicon glyphicon-plus fa-3x"><? else:?><span class="glyphicon glyphicon-minus fa-3x"><?endif;?></td>
+                </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
+<br>
+<br>
+<br>

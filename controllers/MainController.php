@@ -25,12 +25,21 @@ class MainController extends Controller {
     public function actionSent()
     {
         //проверяем оставил сообщение авторизированый пользователь или нет
-        $author = self::userHasLogged();
-        $unknown_user = self::getUnknownUser();
-        $unknown_email = self::getUnknownEmail();
+        $author = self::userHasID();
+        //создаем нового пользователя
+        If(!$author)
+        {
+            //создаем нового пользователя
+            $unknown_user = $_POST['author'];
+            $unknown_email = $_POST['email'];
+            $unknown_homepage = $_POST['homepage'];
+            $unknown_user = User::createNew("$unknown_user","","0","$unknown_email","$unknown_homepage");
+            $author = $unknown_user->id;
+        }
 
-        Message::createNew($_POST['text'], $author, $unknown_user , $unknown_email,
-                           $_POST['browser'], $_POST['ip']);
+
+
+        Message::createNew($_POST['text'], $author, $_POST['browser'], $_POST['ip']);
         //header('Location: ' . $_SERVER['HTTP_REFERER']);
 
     }
@@ -60,23 +69,10 @@ class MainController extends Controller {
         return ($current_user->pass == $_POST['pass'])?$_SESSION['user'] = $current_user:false;
     }
 
-    public static function userHasLogged()
+    public static function userHasID()
     {
-        return (User::isLoggedUser())?$_SESSION['user']['id']:100;
+        return (User::isLoggedUser())?$_SESSION['user']['id']:false;
     }
-
-    public static function  getUnknownUser()
-    {
-        return (User::isLoggedUser())?null:$_POST['author'];
-    }
-
-    public static function getUnknownEmail()
-    {
-        return (User::isLoggedUser())?null:$_POST['email'];
-    }
-
-
-
 
 
 }

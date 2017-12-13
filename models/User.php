@@ -40,6 +40,15 @@ class User extends Object
                 'id' => $this->id
             ));
     }
+    public static function createNew($login, $pass, $is_admin, $email, $homepage){
+
+        //push data to table
+        $oQuery = Object::$db->prepare("INSERT INTO user (login, pass, is_admin, email, homepage) 
+                                                  VALUES (:login, :pass, :is_admin, :email, :homepage) ");
+        $oQuery->execute(['login' => $login, 'pass'=> $pass, 'is_admin'=>$is_admin, 'email'=>$email, 'homepage' => $homepage]);
+        return User::findByName($login);
+
+    }
 
     public static function findByName($name)
     {

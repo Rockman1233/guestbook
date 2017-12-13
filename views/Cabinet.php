@@ -22,12 +22,16 @@
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-default">Редактировать</button>
+                                <?php if($_SESSION['user']->isAdmin): ?>
+                                <p>Вы являетесь администратором портала:</p>
+                                <a type="button" href="../cabinet/admin" class="btn btn-default">Административная панель</a>
+                                <? endif; ?>
                             </form>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
+

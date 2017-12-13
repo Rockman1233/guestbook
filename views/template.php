@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru-Ru">
+<html lang="ru-Ru" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,8 +8,8 @@
     <title>Гостевая книга</title>
 
     <!-- Bootstrap -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
-    <link href="/css/font-awesome.css" rel="stylesheet">
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/font-awesome.css" rel="stylesheet">
     <!-- 1. Подключить CSS-файл Bootstrap 3 -->
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <!-- 2. Подключить CSS-файл библиотеки Bootstrap 3 DateTimePicker -->
@@ -40,7 +40,7 @@
             <ul class="nav navbar-nav">
                 <li <?php if($_SERVER['REQUEST_URI']=='/main/login') echo "class=\"active\""?>><a href="../main/login">Войти</a></li>
                 <?php if(User::isLoggedUser()): ?>
-                <li <?php if($_SERVER['REQUEST_URI']=='/cabinet') echo "class=\"active\""?>><a href="../cabinet/index">Личный кабинет(<?echo $_SESSION['user']->login ?>)</a></li>
+                <li <?php if($_SERVER['REQUEST_URI']=='/cabinet/index') echo "class=\"active\""?>><a href="../cabinet/index">Личный кабинет(<?echo $_SESSION['user']->login ?>)</a></li>
                 <?php endif; ?>
             </ul>
 
@@ -64,13 +64,10 @@
 </div>
 
 <!-- 3. Подключить библиотеку jQuery -->
-<script src="../../js/jquery-3.2.1.min.js"></script>
+<script src="../js/jquery-3.2.1.min.js"></script>
 <!-- 4. Подключить библиотеку moment -->
-<script src="../../js/moment-with-locales.min.js"></script>
+<script src="../js/moment-with-locales.min.js"></script>
 <!-- 5. Подключить js-файл фреймворка Bootstrap 3 -->
-<script src="../../js/bootstrap.min.js"></script>
-<!-- 6. Подключить js-файл библиотеки Bootstrap 3 DateTimePicker -->
-<script src="../../js/bootstrap-datetimepicker.min.js"></script>
-<!-- ajax (add car to contract)-->
+<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
