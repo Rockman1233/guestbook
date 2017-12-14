@@ -37,7 +37,7 @@
          <p><input type="text" class="form-control-static" name="captcha" placeholder="Сюда писать капчу"></p>
          <input type="hidden" class="form-control-static" name="browser" value="<?php echo $_SERVER["HTTP_USER_AGENT"]?>">
          <input type="hidden" class="form-control-static" name="ip" value="<?php echo $_SERVER['REMOTE_ADDR']?>">
-         <p><textarea name="text" cols="40" rows="5" placeholder="Сообщение"></textarea></p>
+         <p><textarea name="text" cols="40" rows="5" required placeholder="Сообщение"></textarea></p>
          <button type="submit" class="btn btn-default">Отправить</button>
          </div>
          <? endif; ?>
