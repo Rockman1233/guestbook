@@ -13,7 +13,7 @@
         <?php foreach ($this->aData as $message): ?>
                 <tr>
                     <td><?php echo $message->login?></td>
-                    <td><?php echo $message->text?>
+                    <td><textarea readonly rows="7" cols="110"><?php echo $message->text?></textarea></td>
                     <td><? if($message->status):?><span class="glyphicon glyphicon-plus fa-3x"><? else:?><span class="glyphicon glyphicon-minus fa-3x"><?endif;?></td>
                     <td><form action="edit_message" method="post">
                             <input type="hidden"  name="message_id" value="<?php echo $message->id?>">

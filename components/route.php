@@ -33,7 +33,7 @@ class Route
 	public function start() {
 
         $uri = $this->getURL();
-        echo "Строка запроса - localhost/".$uri;
+        //echo "Строка запроса - localhost/".$uri;
 
         if(!$uri){
             $controllerFile = $_SERVER['DOCUMENT_ROOT'].'/controllers/MainController.php';
@@ -69,8 +69,8 @@ class Route
                     $actionName='actionIndex';
 
                 }
-                echo '<br> Контроллер - '.$controllerName;
-                echo '<br> Метод контроллера - '.$actionName;
+                //echo '<br> Контроллер - '.$controllerName;
+                //echo '<br> Метод контроллера - '.$actionName;
 
                 //connect files
                 $controllerFile = $_SERVER['DOCUMENT_ROOT'].'/controllers/'.$controllerName.'.php';

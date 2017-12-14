@@ -13,7 +13,7 @@
         <?php If($message->status): ?>
         <tr>
             <td><?php echo $message->login?></td>
-            <td><?php echo $message->text?></td>
+            <td><textarea readonly rows="7" cols="170"><?php echo $message->text?></textarea></td>
         </tr>
         <? endif; ?>
         <?php endforeach; ?>

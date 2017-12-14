@@ -32,43 +32,48 @@ class MainController extends Controller {
         If($_SESSION['captcha']['code'] == $_POST['captcha']) {
             //проверяем оставил сообщение авторизированый пользователь или нет
             $author = self::userHasID();
-            //создаем нового пользователя
+            //если пользователь не авторизован, создаем нового пользователя
             If (!$author) {
                 //создаем нового пользователя
                 $unknown_user = $_POST['author'];
-                If (!$unknown_user) {
-                    $this->view->addData('system_message','<p>Введите свое имя</p>');
-                    $this->view->content = 'Main.php';
-                    $this->view->generate();
-                };
+                    If (!$unknown_user) {
+                        $this->view->addData('system_message','<p>Введите свое имя</p>');
+                        $this->view->content = 'Main.php';
+                        $this->view->generate();
+                        exit();
+                    };
                 $unknown_email = $_POST['email'];
-                If (!$unknown_email) {
-                    $this->view->addData('system_message','<p>Введите свой email</p>');
-                    $this->view->content = 'Main.php';
-                    $this->view->generate();
-                };
+                    If (!$unknown_email) {
+                        $this->view->addData('system_message','<p>Введите свой email</p>');
+                        $this->view->content = 'Main.php';
+                        $this->view->generate();
+                        exit();
+                    };
                 $unknown_homepage = $_POST['homepage'];
                 //пользователь мог не авторизоваться, но мог  ранее оставлять сообщения под данным никненймом, проверим это
                 $search_of_user = User::findByName($_POST['author']);
-                If (!$search_of_user) {
-                    $unknown_user = User::createNew("$unknown_user", "", "$unknown_email", "$unknown_homepage");
-                    $author = $unknown_user->id;
-                    $this->view->addData('system_message','<p>Сообщение отправлено.Вы можете использовать этот логин для регистрации (для этого войдите под ним и создайте пароль в личном кабинете)</p>');
-                    $this->view->content = 'Main.php';
-                    $this->view->generate();
-                } else {
-                    $author = $search_of_user->id;
-                    $this->view->addData('system_message','<p>Сообщение отправлено</p>');
-                    $this->view->content = 'Main.php';
-                    $this->view->generate();
-                }
+                    If (!$search_of_user) {
+                        $unknown_user = User::createNew("$unknown_user", "", "$unknown_email", "$unknown_homepage");
+                        $author = $unknown_user->id;
+                        $this->view->addData('system_message','<p>Сообщение отправлено.Вы можете использовать этот логин для регистрации (для этого войдите под ним и создайте пароль в личном кабинете)</p>');
+                        $this->view->content = 'Main.php';
+                        $this->view->generate();
+                    } else {
+                        $author = $search_of_user->id;
+                        $this->view->addData('system_message','<p>Сообщение отправлено</p>');
+                        $this->view->content = 'Main.php';
+                        $this->view->generate();
+                    }
             } else {
                 $this->view->addData('system_message','<p>Сообщение отправлено на модерацию</p>');
                 $this->view->content = 'Main.php';
                 $this->view->generate();
             }
             $this->view->addData('system_message','<p>Сообщение отправлено на модерацию</p>');
-            Message::createNew($_POST['text'], $author, $_POST['browser'], $_POST['ip']);
+
+            //если все поля валидны то создаем новое сообщение предварительно очистив от тегов
+            $clean_text = strip_tags($_POST['text'], '<strike><strong><i><code><a>');
+            Message::createNew($clean_text, $author, $_POST['browser'], $_POST['ip']);
         }else{
             $this->view->addData('system_message','<p>Капча не совпала</p>');
             $this->view->content = 'Main.php';
