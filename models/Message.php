@@ -22,10 +22,24 @@ class Message extends Object
         return 'message';
     }
 
-    public static function getAll()
+    public static function getAllPagination($page)
+    {
+        $page = intval($page);
+        $count = Object::SHOW_DEFAULT;
+        $offset = $count * ($page - 1);
+        //get all messages which has a confirmed status
+        $oQuery = Object::$db->query("SELECT user.login, message.text, message.status, message.id 
+                                                FROM message JOIN user ON message.author = user.id WHERE message.status = True LIMIT $count OFFSET $offset");
+
+        return $oQuery->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public static function getAllwithoutPagination()
     {
         //get all messages which has a confirmed status
-        $oQuery = Object::$db->query("SELECT user.login, message.text, message.status, message.id FROM message JOIN user ON message.author = user.id ");
+        $oQuery = Object::$db->query("SELECT user.login, message.text, message.status, message.id 
+                                                FROM message JOIN user ON message.author = user.id ");
+
         return $oQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
@@ -36,6 +50,12 @@ class Message extends Object
                                                   VALUES (:text, :author, :browser, :ip, :status) ");
         $oQuery->execute(['text' => $text, 'author'=> $author, 'browser'=>$browser, 'ip'=>$ip, 'status' => $status]);
 
+    }
+
+    public static function Total()
+    {
+        $oQuery = Object::$db->query("SELECT COUNT(*) FROM message WHERE status>0");
+        return $oQuery->fetch(PDO::FETCH_ASSOC);
     }
 
     public function edit() {

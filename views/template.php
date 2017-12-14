@@ -32,15 +32,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="../">Гостевая книга</a>
+            <a class="navbar-brand" href="../index.php">Гостевая книга</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li <?php if($_SERVER['REQUEST_URI']=='/main/login') echo "class=\"active\""?>><a href="../main/login">Войти</a></li>
+                <li <?php if($_SERVER['REQUEST_URI']=='/login') echo "class=\"active\""?>><a href="../login">Войти</a></li>
                 <?php if(User::isLoggedUser()): ?>
-                <li <?php if($_SERVER['REQUEST_URI']=='/cabinet/index') echo "class=\"active\""?>><a href="../cabinet/index">Личный кабинет(<?echo $_SESSION['user']->login ?>)</a></li>
+                <li <?php if($_SERVER['REQUEST_URI']=='/cabinet') echo "class=\"active\""?>><a href="../cabinet">Личный кабинет(<?echo $_SESSION['user']->login ?>)</a></li>
                 <?php endif; ?>
             </ul>
 

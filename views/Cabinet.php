@@ -8,23 +8,28 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class=" col-md-9 col-lg-9 ">
-                            <form action="edit" method="post">
+                            <form action="personal" method="post">
                                 <table class="table table-user-information">
                                     <tbody>
                                     <tr>
                                         <td>E-mail:</td>
-                                        <td><input type="email" class="form-control-static" name="email" placeholder="<?php echo $_SESSION['user']->email ?>"></td>
+                                        <td><input type="email" class="form-control-static" name="email" value="<?php echo $_SESSION['user']->email ?>"</td>
                                     </tr>
                                     <tr>
                                         <td>Домашняя страничка:</td>
-                                        <td><input type="text" class="form-control-static" name="homepage" placeholder="<?php echo $_SESSION['user']->homepage ?>"></td>
+                                        <td><input type="text" class="form-control-static" name="homepage" value="<?php echo $_SESSION['user']->homepage ?>"</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Текущий пароль:</td>
+                                        <td><input type="text" class="form-control-static" name="pass" value="<?php echo $_SESSION['user']->pass ?>"</td>
                                     </tr>
                                     </tbody>
                                 </table>
                                 <button type="submit" class="btn btn-default">Редактировать</button>
-                                <?php if($_SESSION['user']->isAdmin): ?>
+                                <?php if($_SESSION['user']->is_admin): ?>
                                 <p>Вы являетесь администратором портала:</p>
-                                <a type="button" href="../cabinet/admin" class="btn btn-default">Административная панель</a>
+                                <a type="button" href="moderation" class="btn btn-default">Модерация сообщений</a>
+                                <a type="button" href="users" class="btn btn-default">Список пользователей</a>
                                 <? endif; ?>
                             </form>
                         </div>

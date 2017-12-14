@@ -19,7 +19,6 @@ class User extends Object
     public $ip;
 
 
-
     static function TableName()
     {
         return 'user';
@@ -30,17 +29,21 @@ class User extends Object
         $prepare = self::$db->prepare(
             'UPDATE user SET
                         email  = :email,
-                        homepage = :homepage 
+                        homepage = :homepage,
+                        is_admin = :is_admin,
+                        pass = :pass 
                         WHERE id=:id');
 
         $prepare->execute(
             array(
                 'email'=> $this->email,
+                'pass'=> $this->pass,
                 'homepage'=> $this->homepage,
+                'is_admin'=> $this->is_admin,
                 'id' => $this->id
             ));
     }
-    public static function createNew($login, $pass, $is_admin, $email, $homepage){
+    public static function createNew($login, $pass, $email, $homepage, $is_admin = 0){
 
         //push data to table
         $oQuery = Object::$db->prepare("INSERT INTO user (login, pass, is_admin, email, homepage) 

@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class=" col-md-9 col-lg-9 ">
-                            <form action="editmessage" method="post">
+                            <form action="edit_message" method="post">
                                 <table class="table table-user-information">
                                     <tbody>
                                     <tr>

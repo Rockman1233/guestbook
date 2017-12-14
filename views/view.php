@@ -21,7 +21,6 @@ class View
     function addData($sName, $Value)
     {
         $this->aData[$sName] = $Value;
-
     }
 
     function generate()

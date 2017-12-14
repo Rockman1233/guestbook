@@ -6,6 +6,7 @@ abstract class Object{
 
     /** @var  PDO */
     static $db;
+    const SHOW_DEFAULT = 3; //pagination - How many goods do you want to see on page?
 
     public function __construct($params = [])
     {
@@ -54,7 +55,7 @@ abstract class Object{
         $class = get_called_class();
         $table = $class::TableName();
         $oQuery = self::$db->query("SELECT * FROM {$table}");
-        return $oQuery->fetchAll(PDO::FETCH_ASSOC);
+        return $oQuery->fetchAll(PDO::FETCH_OBJ);
     }
 
     public static function delete($id) {

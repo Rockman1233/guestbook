@@ -47,7 +47,6 @@ class Route
                 //black magic (change reg exp)
                 $internalRoute = preg_replace("~$uriPattern~","$path","$uri");
 
-
                 $segments = explode('/',$internalRoute);
 
 
@@ -58,7 +57,8 @@ class Route
                 $controllerName = ucfirst($controllerName);
 
                 //take name of method
-
+                //echo '<pre>';
+                //echo var_dump($segments);
                 $actionName = 'action'.ucfirst(array_shift($segments));
                 $parametrs = $segments;
 
